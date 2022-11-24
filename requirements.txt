@@ -1,0 +1,8 @@
+pymongo
+flask<=2.1.2
+flask-restx
+werkzeug<=2.1.2
+stream_zip
+six
+flask-cors
+gunicorn
