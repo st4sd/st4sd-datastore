@@ -36,7 +36,7 @@ rootLogger = logging.getLogger()
 rootLogger.setLevel(20)
 
 from flask import Flask, request, Blueprint
-from flask_restx import Api, Resource, Namespace, reqparse
+from flask_restx import Api, Resource, Namespace, reqparse, inputs
 import sys
 import flask_restx.apidoc
 
@@ -182,6 +182,14 @@ class DBQuery(Resource):
              'When query returns an `experiment`-type MongoDocument it interprets the includeProperties '
              'instruction to insert a new field in `interface.propertyTable` which is a dictionary representation of a '
              'pandas.DataFrame object containing the measured properties in by $FlowIR.interface.')
+    _query_parser.add_argument(
+        'stringifyNaN',
+        # AP - boolean values have to be parsed with this type
+        # see: https://github.com/noirbizarre/flask-restplus/issues/199
+        type=inputs.boolean,
+        default=False,
+        help='A boolean flag that allows converting NaN and infinite values to strings.',
+    )
 
     @api.expect(_query_parser)
     def post(self):
@@ -194,6 +202,8 @@ class DBQuery(Resource):
         if str_include_properties is not None:
             include_properties = [x.lower() for x in str_include_properties.split(',')]
 
+        stringify_nan: bool = args.stringifyNaN
+
         data = request.get_json(force=True)
 
         def process_doc(x):
@@ -205,7 +215,8 @@ class DBQuery(Resource):
         try:
             # VV: This gets an Iterable of Documents instead of a List of documents. In the future we can find a way
             # so as not to maintain the entire list in memory but rather stream it.
-            docs = mongo._kernel_getDocument(query=data, include_properties=include_properties)
+            docs = mongo._kernel_getDocument(query=data, include_properties=include_properties,
+                                             stringify_nan=stringify_nan)
         except pymongo.errors.ConnectionFailure as e:
             rootLogger.critical("Unable to query with MongoDB: %s - exiting" % e)
             kill_web_server(4)
