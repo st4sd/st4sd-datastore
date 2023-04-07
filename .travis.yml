@@ -2,11 +2,11 @@ language: python
 
 stages:
 - name: image
-  if: branch = master AND type != pull_request
+  if: branch = main AND type != pull_request
 - name: multiarch
-  if: branch = master AND type != pull_request
+  if: branch = main AND type != pull_request
 - name: deploy-to-dev
-  if: branch = master AND type != pull_request
+  if: branch = main AND type != pull_request
 - name: new-git-release
   if: tag is present
 
