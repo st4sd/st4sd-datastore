@@ -64,4 +64,4 @@ jobs:
       - docker run --rm -it
           --env DOCKER_REGISTRY --env DOCKER_TOKEN --env DOCKER_USERNAME
           -v `pwd`/deploy:/scripts -w /scripts --entrypoint /scripts/skopeo_copy.sh quay.io/skopeo/stable
-          ${IMAGE_BASE_URL}latest ${IMAGE_BASE_URL}:release-candidate
+          ${IMAGE_BASE_URL}:latest ${IMAGE_BASE_URL}:release-candidate
