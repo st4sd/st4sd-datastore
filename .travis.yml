@@ -72,7 +72,6 @@ jobs:
       os: linux
       python: "3.10"
       env:
-        env:
       - BUILD_PYTHON_VERSION=310
       script:
         - export SRC_TAG_X8664="py${BUILD_PYTHON_VERSION}-latest-x86_64"
