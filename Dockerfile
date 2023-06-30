@@ -5,7 +5,7 @@ FROM $base_image
 COPY requirements.txt /tmp/st4sd-datastore/requirements.txt
 
 RUN  apt-get update -y && \
-     apt-get install -y python3.7 nginx && \
+     apt-get install -y nginx && \
      pip install --upgrade pip setuptools && \
      rm -rf /var/lib/apt/lists/* && \
      pip install -r /tmp/st4sd-datastore/requirements.txt
