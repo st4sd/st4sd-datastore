@@ -26,9 +26,9 @@ jobs:
         - BUILD_PYTHON_VERSION=37
       script:
         - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_TOKEN}" "${DOCKER_REGISTRY}"
-        - docker build --pull -t ${IMAGE_BASE_URL}:py{BUILD_PYTHON_VERSION}-latest-`arch` -f Dockerfile .
-          --build-arg base_image=${RUNTIMECORE_URL}:py{BUILD_PYTHON_VERSION}-latest-`arch`
-        - docker push ${IMAGE_BASE_URL}:py{BUILD_PYTHON_VERSION}-latest-`arch`
+        - docker build --pull -t ${IMAGE_BASE_URL}:py${BUILD_PYTHON_VERSION}-latest-`arch` -f Dockerfile .
+          --build-arg base_image=${RUNTIMECORE_URL}:py${BUILD_PYTHON_VERSION}-latest-`arch`
+        - docker push ${IMAGE_BASE_URL}:py${BUILD_PYTHON_VERSION}-latest-`arch`
       os: linux
       python: "3.7"
 
@@ -39,9 +39,9 @@ jobs:
         - BUILD_PYTHON_VERSION=310
       script:
         - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_TOKEN}" "${DOCKER_REGISTRY}"
-        - docker build --pull -t ${IMAGE_BASE_URL}:py{BUILD_PYTHON_VERSION}-latest-`arch` -f Dockerfile .
-          --build-arg base_image=${RUNTIMECORE_URL}:py{BUILD_PYTHON_VERSION}-latest-`arch`
-        - docker push ${IMAGE_BASE_URL}:py{BUILD_PYTHON_VERSION}-latest-`arch`
+        - docker build --pull -t ${IMAGE_BASE_URL}:py${BUILD_PYTHON_VERSION}-latest-`arch` -f Dockerfile .
+          --build-arg base_image=${RUNTIMECORE_URL}:py${BUILD_PYTHON_VERSION}-latest-`arch`
+        - docker push ${IMAGE_BASE_URL}:py${BUILD_PYTHON_VERSION}-latest-`arch`
       os: linux
       python: "3.10"
     # VV: Disable PPC64LE builds because we do not have a PPC64LE build for the base layer (st4sd-runtime-core)
