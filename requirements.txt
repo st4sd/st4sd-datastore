@@ -1,7 +1,7 @@
 pymongo
-flask<=2.1.2
+flask
 flask-restx
-werkzeug<=2.1.2
+werkzeug
 stream_zip
 six
 flask-cors
