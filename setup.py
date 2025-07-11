@@ -84,6 +84,6 @@ setup(
     install_requires=[
         'st4sd-runtime-core',
         'pymongo',
-        'flask<=2.1.2', 'flask-restx', 'stream_zip', "six", "flask-cors", "werkzeug<=2.1.2",
+        'flask', 'flask-restx', 'stream_zip', "six", "flask-cors", "werkzeug",
     ],
 )
